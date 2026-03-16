@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────── */
+:root {
+  --bg:         #0f0f0f;
+  --bg-2:       #141414;
+  --bg-3:       #1a1a1a;
+  --border:     rgba(255,255,255,0.07);
+  --accent:     #7c3aed;
+  --accent-2:   #a855f7;
+  --glow:       rgba(124, 58, 237, 0.35);
+  --text:       #e8e8e8;
+  --muted:      #888;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ─── Typography helpers ─────────────────────────────────── */
+.font-display { font-family: 'Syne', sans-serif; }
+
+/* ─── Noise texture overlay ──────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── Gradient text utility ──────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glass card ─────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--border);
+}
+
+/* ─── Glow shadow ────────────────────────────────────────── */
+.glow-purple { box-shadow: 0 0 40px var(--glow); }
+
+/* ─── Marquee animation ──────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ─── Orbit animations ───────────────────────────────────── */
+
+/*
+  Each icon wrapper orbits using transform-origin set to the avatar center.
+  The icon itself has no rotation applied — it always stays upright.
+  No counter-spin needed.
+*/
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* The invisible ring that rotates around the avatar */
+.orbit-ring {
+  position: absolute;
+  inset: -85px;
+  border-radius: 50%;
+  animation: orbit-spin 30s linear infinite;
+  animation-play-state: running;
+  pointer-events: none;
+}
+
+/* Pause the whole ring when any icon inside is hovered */
+.orbit-ring:has(a:hover) {
+  animation-play-state: paused;
+}
+
+/* Each icon's position wrapper */
+.orbit-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: -20px;
+  animation: none;
+  pointer-events: auto;
+}
+
+/* The visible icon button — no animation, always upright */
+.orbit-icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* No animation here — icon stays naturally upright */
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #888;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.orbit-icon-inner:hover {
+  color: #fff;
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(88, 28, 135, 0.4);
+  transform: scale(1.25);
+}
+
+/* ─── Cursor glow ────────────────────────────────────────── */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+/* ─── Section fade-in helper ─────────────────────────────── */
+.section-padding { padding: 6rem 0; }
+
+/* ─── Input focus ring ───────────────────────────────────── */
+.input-field {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+  transition: border-color 0.25s, box-shadow 0.25s;
+  border-radius: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  width: 100%;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+}
+.input-field::placeholder { color: #555; }
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
+}
+
+/* ─── Bento grid ─────────────────────────────────────────── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 900px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .bento-grid { grid-template-columns: 1fr; }
+}
