@@ -124,8 +124,8 @@ export default function About() {
             </p>
 
             <motion.a
-              href="/CV.pdf"
-              download="Muhammad_Nouraiz_Resume.pdf"
+              href="/Muhammad_Nouraiz_Resume.pdf"
+              download
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
