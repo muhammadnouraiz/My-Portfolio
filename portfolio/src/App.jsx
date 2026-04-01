@@ -10,6 +10,7 @@ import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact  from "./components/Contact";
 import Footer   from "./components/Footer";
+import Snowfall from "react-snowfall";
 
 /**
  * CursorGlow – follows the mouse with a soft radial gradient.
@@ -53,6 +54,8 @@ export default function App() {
       >
         {/* Ambient cursor glow */}
         <CursorGlow />
+
+        <Snowfall color="#ffffff" snowflakeCount={150} className="snowfall-overlay" />
 
         {/* Site background gradient */}
         <div className="fixed inset-0 -z-10 bg-[#0f0f0f]">
