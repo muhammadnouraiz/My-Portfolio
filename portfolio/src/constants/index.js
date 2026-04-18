@@ -14,7 +14,7 @@ import passwordImg       from "../assets/projects/password-generator.png";
 export const OWNER = {
   name: "Nouraiz",
   fullName: "Muhammad Nouraiz",
-  role: "Front-End Developer",
+  role: "Web Developer",
   tagline: "I craft fast, scalable & user-centric web experiences.",
   bio: "Detail-oriented Software Engineering student and Front-End Developer with a strong foundation in building scalable, user-centric web applications. Proven experience in developing interactive dashboards and modern UIs using React.js and Tailwind CSS. Passionate about writing clean, maintainable code and solving complex UI challenges.",
   email: "muhammadnouraiz842@gmail.com",
