@@ -18,7 +18,7 @@ export const OWNER = {
   tagline: "I craft fast, scalable & user-centric web experiences.",
   bio: "Detail-oriented Software Engineering student and Front-End Developer with a strong foundation in building scalable, user-centric web applications. Proven experience in developing interactive dashboards and modern UIs using React.js and Tailwind CSS. Passionate about writing clean, maintainable code and solving complex UI challenges.",
   email: "muhammadnouraiz842@gmail.com",
-  location: "Hafizabad, Punjab, Pakistan",
+  location: "Islamabad, Punjab, Pakistan",
   phone: "+92 308-0636522",
   university: "UET Taxila — BS Software Engineering (2022–2026)",
 };
